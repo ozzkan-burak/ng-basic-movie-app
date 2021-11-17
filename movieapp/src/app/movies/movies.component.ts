@@ -9,9 +9,11 @@ import { MovieRepository } from '../models/movie.repository';
 })
 export class MoviesComponent implements OnInit {
 
+  title= "Film Listesi";
+  popularTitle = "Popüler Filmler";
+  alert= "Listede Film Bulunmuyor";
   movies: Movie[];
   movieRepository: MovieRepository;
-
 
   constructor() {
     this.movieRepository = new MovieRepository();

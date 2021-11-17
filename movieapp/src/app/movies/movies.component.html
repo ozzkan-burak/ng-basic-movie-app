@@ -1,15 +1,51 @@
+<div *ngIf="movies.length > 0 else no_movies">
+  <h1>{{title}}</h1>
+  <div class="alert alert-warning">{{movies.length}} adet film listelendi</div>
 
-<div class="card mb-3" *ngFor="let item of movies">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{item.title}}</h5>
-        <p class="card-text">{{item.desc}}</p>
-        <button class="btn btn-sm btn-outline-primary">Detail</button>
+  <!-- Parametresiz template kullanımı -->
+  <ng-template [ngTemplateOutlet]="movieList1" ></ng-template>
+
+  <!-- Parametreli template kullanımı -->
+  <ng-template [ngTemplateOutlet]="movieList2" [ngTemplateOutletContext]="{movies: movieRepository.getMovies()}" }></ng-template>
+
+</div>
+
+<ng-template  #no_movies>
+  <div class="alert alert-warning">{{alert}}</div>
+</ng-template>
+
+<ng-template #movieList1>
+  <div class="card mb-3" *ngFor="let item of movies">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.desc}}</p>
+          <button class="btn btn-sm btn-outline-primary">Detail</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
+
+<!-- dışrıdan parametre alan template -->
+<ng-template #movieList2 let-popularFilms="movies">
+  <h2>{{popularTitle}}</h2>
+  <div class="card mb-3" *ngFor="let item of popularFilms">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.desc}}</p>
+          <button class="btn btn-sm btn-outline-primary">Detail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
