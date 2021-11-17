@@ -10,7 +10,8 @@ import { MovieRepository } from '../models/movie.repository';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
-  movieRepository: MovieRepository();
+  movieRepository: MovieRepository;
+
 
   constructor() {
     this.movieRepository = new MovieRepository();
@@ -19,9 +20,6 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  //movies = ["Film 1", "Film 2", "Film 3", "Film 4"]
-
 
 
 }
