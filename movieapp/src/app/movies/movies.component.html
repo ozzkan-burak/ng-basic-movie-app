@@ -2,11 +2,11 @@
   <h1>{{title}}</h1>
   <div class="alert alert-warning">{{movies.length}} adet film listelendi</div>
 
-  <!-- Parametresiz template kullanımı -->
-  <ng-template [ngTemplateOutlet]="movieList1" ></ng-template>
-
   <!-- Parametreli template kullanımı -->
-  <ng-template [ngTemplateOutlet]="movieList2" [ngTemplateOutletContext]="{movies: movieRepository.getMovies()}" }></ng-template>
+  <ng-template [ngTemplateOutlet]="movieList3" [ngTemplateOutletContext]="{movies: popularMovies}" }></ng-template>
+
+ <!-- Parametresiz template kullanımı -->
+  <ng-template [ngTemplateOutlet]="movieList1" ></ng-template>
 
 </div>
 
@@ -44,6 +44,20 @@
           <h5 class="card-title">{{item.title}}</h5>
           <p class="card-text">{{item.desc}}</p>
           <button class="btn btn-sm btn-outline-primary">Detail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #movieList3 let-filmler="movies3" >
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div class="col" *ngFor="let item of movies">
+      <div class="card h-100">
+        <img src="/assets/img/{{item.imageUrl}}" alt={{item.title}} class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.desc}}</p>
         </div>
       </div>
     </div>
