@@ -3,4 +3,5 @@ export interface Movie {
   title: string;
   desc: string;
   imageUrl: string;
+  isPopular: boolean;
 }
