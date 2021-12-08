@@ -1,6 +1,6 @@
 <div *ngIf="movies.length > 0 else no_movies">
   <h1>{{title}}</h1>
-  <div class="alert alert-warning">{{movies.length}} adet film listelendi</div>
+  <div class="alert alert-warning">{{FilteredMovies.length}} adet film listelendi</div>
 
 
 
@@ -12,20 +12,19 @@
 
 </div>
 
-
-
+<div class="mb-3">
+  <input type="text" [(ngModel)]="filterText" (ngModelChange)="onInputChange()" class="form-control" placeholder="Arama"  />
+  <small class="text-muted" *ngIf="filterText"> Aradığınız Kelime: {{filterText}}</small>
+</div>
 
 <ng-template  #no_movies>
   <div class="alert alert-warning">{{alert}}</div>
 </ng-template>
 
-<div class="mb-3">
-  <input type="text" class="form-control" placeholder="Arama" [(ngModel)]="filterText" />
-  <small class="text-muted" *ngIf="filterText"> Aradığınız Kelime: {{filterText}}</small>
-</div>
+
 
 <ng-template #movieList1>
-  <div class="card mb-3" *ngFor="let item of movies | movieFilter: filterText">
+  <div class="card mb-3" *ngFor="let item of FilteredMovies">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="...">
@@ -35,6 +34,7 @@
           <h5 class="card-title">{{item.title}}</h5>
           <p class="card-text">{{item.desc}}</p>
           <button class="btn btn-sm btn-outline-primary">Detail</button>
+          <button (click)="addToList($event, item)" class="btn btn-sm btn-primary ms-1">Listeye Ekle</button>
         </div>
       </div>
     </div>
@@ -55,7 +55,10 @@
         <div class="card-body">
           <h5 class="card-title">{{item.title}}</h5>
           <p class="card-text">{{item.desc}}</p>
-          <button class="btn btn-sm btn-outline-primary">Detail</button>
+          <div>
+            <button class="btn btn-sm btn-outline-primary">Detay</button>
+
+          </div>
         </div>
       </div>
     </div>
