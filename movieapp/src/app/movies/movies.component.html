@@ -2,6 +2,8 @@
   <h1>{{title}}</h1>
   <div class="alert alert-warning">{{movies.length}} adet film listelendi</div>
 
+
+
   <!-- Parametreli template kullanımı -->
   <ng-template [ngTemplateOutlet]="movieList3" [ngTemplateOutletContext]="{movies: popularMovies}" }></ng-template>
 
@@ -10,12 +12,20 @@
 
 </div>
 
+
+
+
 <ng-template  #no_movies>
   <div class="alert alert-warning">{{alert}}</div>
 </ng-template>
 
+<div class="mb-3">
+  <input type="text" class="form-control" placeholder="Arama" [(ngModel)]="filterText" />
+  <small class="text-muted" *ngIf="filterText"> Aradığınız Kelime: {{filterText}}</small>
+</div>
+
 <ng-template #movieList1>
-  <div class="card mb-3" *ngFor="let item of movies">
+  <div class="card mb-3" *ngFor="let item of movies | movieFilter: filterText">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="assets/img/{{item.imageUrl}}" class="img-fluid rounded-start" alt="...">
@@ -30,6 +40,8 @@
     </div>
   </div>
 </ng-template>
+
+
 
 <!-- dışrıdan parametre alan template -->
 <ng-template #movieList2 let-popularFilms="movies">
