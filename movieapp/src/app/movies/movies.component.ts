@@ -13,6 +13,7 @@ export class MoviesComponent implements OnInit {
   popularTitle = "Popüler Filmler";
   alert= "Listede Film Bulunmuyor";
   movies: Movie[];
+  FilteredMovies: Movie[];
   popularMovies: Movie[];
   movieRepository: MovieRepository;
   filterText : string = "";
@@ -21,10 +22,29 @@ export class MoviesComponent implements OnInit {
     this.movieRepository = new MovieRepository();
     this.movies = this.movieRepository.getMovies();
     this.popularMovies = this.movieRepository.getPopularMovies();
+    this.FilteredMovies = this.movies
   }
 
   ngOnInit(): void {
   }
 
+  onInputChange(){
+    this.FilteredMovies = this.filterText ?
+      this.movies.filter(movie => movie.title.toLowerCase().includes(this.filterText.toLowerCase()) || movie.desc.toLowerCase().includes(this.filterText.toLowerCase()))
+      : this.movies;
+  }
+
+  addToList($event: any, movie: Movie){
+
+    if($event.target.classList.contains('btn-primary')){
+      $event.target.innerText = 'Listeden Çıkar';
+      $event.target.classList.remove('btn-primary');
+      $event.target.classList.add('btn-warning');
+    } else {
+      $event.target.innerText = 'Listeye ekle';
+      $event.target.classList.remove('btn-warning');
+      $event.target.classList.add('btn-primary');
+    }
+  }
 
 }
