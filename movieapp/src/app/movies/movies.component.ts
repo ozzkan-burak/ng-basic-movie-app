@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
+import { AlertifyService } from '../services/alertify.service';
 
-declare let alertify: any;
+
 
 @Component({
   selector: 'movies',
@@ -20,7 +21,7 @@ export class MoviesComponent implements OnInit {
   movieRepository: MovieRepository;
   filterText : string = "";
 
-  constructor() {
+  constructor(private alertify: AlertifyService) {
     this.movieRepository = new MovieRepository();
     this.movies = this.movieRepository.getMovies();
     this.popularMovies = this.movieRepository.getPopularMovies();
@@ -43,13 +44,13 @@ export class MoviesComponent implements OnInit {
       $event.target.classList.remove('btn-primary');
       $event.target.classList.add('btn-warning');
 
-      alertify.success(`${movie.title} Listeye Eklendi`);
+      this.alertify.success(`${movie.title} Listeye Eklendi`);
     } else {
       $event.target.innerText = 'Listeye ekle';
       $event.target.classList.remove('btn-warning');
       $event.target.classList.add('btn-primary');
 
-      alertify.error(`${movie.title} Listeden Çıkarıldı`);
+      this.alertify.error(`${movie.title} Listeden Çıkarıldı`);
     }
   }
 
