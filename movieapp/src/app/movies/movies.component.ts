@@ -1,34 +1,39 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
 import { AlertifyService } from '../services/alertify.service';
+import { MovieService } from '../services/movie.service';
 
 
 
 @Component({
   selector: 'movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
+  styleUrls: ['./movies.component.scss'],
+  providers: [MovieService]
 })
 export class MoviesComponent implements OnInit {
 
   title= "Film Listesi";
   popularTitle = "Popüler Filmler";
   alert= "Listede Film Bulunmuyor";
-  movies: Movie[];
-  FilteredMovies: Movie[];
+  movies: Movie[] = [];
+  FilteredMovies: Movie[] = [];
   popularMovies: Movie[];
   movieRepository: MovieRepository;
   filterText : string = "";
 
-  constructor(private alertify: AlertifyService) {
-    this.movieRepository = new MovieRepository();
-    this.movies = this.movieRepository.getMovies();
-    this.popularMovies = this.movieRepository.getPopularMovies();
-    this.FilteredMovies = this.movies
+  constructor(private alertify: AlertifyService, private movieService: MovieService) {
+    // this.popularMovies = this.movieRepository.getPopularMovies();
+
   }
 
   ngOnInit(): void {
+    this.movieService.getMovies().subscribe(data => {
+      this.movies = data;
+      this.FilteredMovies = this.movies;
+    })
   }
 
   onInputChange(){
