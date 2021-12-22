@@ -23,6 +23,7 @@ export class MoviesComponent implements OnInit {
   popularMovies: Movie[];
   movieRepository: MovieRepository;
   filterText : string = "";
+  error: any
 
   constructor(private alertify: AlertifyService, private movieService: MovieService) {
     // this.popularMovies = this.movieRepository.getPopularMovies();
@@ -33,7 +34,7 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe(data => {
       this.movies = data;
       this.FilteredMovies = this.movies;
-    })
+    }, error => this.error = error);
   }
 
   onInputChange(){
