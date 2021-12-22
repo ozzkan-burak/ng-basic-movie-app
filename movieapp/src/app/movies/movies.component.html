@@ -1,3 +1,8 @@
+<div class="alert alert-danger" *ngIf="error">
+  {{error.message}}
+</div>
+
+
 <div *ngIf="movies.length > 0 else no_movies">
   <h1>{{title}}</h1>
   <div class="alert alert-warning">{{FilteredMovies.length}} adet film listelendi</div>
