@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/movie';
 import { MovieRepository } from '../models/movie.repository';
 import { AlertifyService } from '../services/alertify.service';
@@ -25,16 +26,23 @@ export class MoviesComponent implements OnInit {
   filterText : string = "";
   error: any
 
-  constructor(private alertify: AlertifyService, private movieService: MovieService) {
+  constructor(
+    private alertify: AlertifyService,
+    private movieService: MovieService,
+    private activatedRoot: ActivatedRoute,
+    ) {
     // this.popularMovies = this.movieRepository.getPopularMovies();
 
   }
 
   ngOnInit(): void {
-    this.movieService.getMovies().subscribe(data => {
-      this.movies = data;
-      this.FilteredMovies = this.movies;
-    }, error => this.error = error);
+    this.activatedRoot.params.subscribe(params => {
+
+      this.movieService.getMovies(params["id"]).subscribe(data => {
+        this.movies = data;
+        this.FilteredMovies = this.movies;
+      }, error => this.error = error);
+    })
   }
 
   onInputChange(){
