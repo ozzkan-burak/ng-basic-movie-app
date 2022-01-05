@@ -1,1 +1,21 @@
-<p>movie-details works!</p>
+<div *ngIf="movie else no_movie">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="assets/img/{{movie.imageUrl}}" alt=""class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-8">
+        <div class="cord-body">
+          <h2>{{movie.title}}</h2>
+          <p>{{movie.desc}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #no_movie>
+  <div class="alert alert-danger">
+    <strong>Film bulunamadı!</strong>
+  </div>
+</ng-template>

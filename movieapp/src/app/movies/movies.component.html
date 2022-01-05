@@ -38,7 +38,7 @@
         <div class="card-body">
           <h5 class="card-title">{{item.title}}</h5>
           <p class="card-text">{{item.desc}}</p>
-          <button class="btn btn-sm btn-outline-primary">Detail</button>
+          <a routerLink="/movies/{{item.id}}" class="btn btn-sm btn-outline-primary">Detay</a>
           <button (click)="addToList($event, item)" class="btn btn-sm btn-primary ms-1">Listeye Ekle</button>
         </div>
       </div>
