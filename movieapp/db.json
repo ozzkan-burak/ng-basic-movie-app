@@ -31,33 +31,6 @@
       "imageUrl": "4.jpeg",
       "isPopular": 0,
       "categoryId": 4
-    },
-    {
-      "id": 5,
-      "title": "yeni film",
-      "desc": "yeni film açıklama",
-      "imageUrl": "1.jpeg",
-      "isPopular": false,
-      "categoryId": "4",
-      "datePublished": 1642019215972
-    },
-    {
-      "id": 6,
-      "title": "yeni test",
-      "desc": "tes açıklama",
-      "imageUrl": "2.jpeg",
-      "isPopular": false,
-      "categoryId": "5",
-      "datePublished": 1642019436225
-    },
-    {
-      "id": 7,
-      "title": "yep yeni bir film",
-      "desc": "yeni film açıklaması",
-      "imageUrl": "3.jpeg",
-      "isPopular": false,
-      "categoryId": "1",
-      "datePublished": 1642019610131
     }
   ],
   "categories": [
