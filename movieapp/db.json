@@ -31,28 +31,37 @@
       "imageUrl": "4.jpeg",
       "isPopular": 0,
       "categoryId": 4
+    },
+    {
+      "id": 5,
+      "title": "extension",
+      "desc": "extension extension",
+      "imageUrl": "1.jpeg",
+      "isPopular": false,
+      "categoryId": "1",
+      "datePublished": 1643229816708
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "macera"
+      "name": "adventure"
     },
     {
       "id": 2,
-      "name": "romantik"
+      "name": "romantic"
     },
     {
       "id": 3,
-      "name": "komedi"
+      "name": "comedy"
     },
     {
       "id": 4,
-      "name": "dram"
+      "name": "drama"
     },
     {
       "id": 5,
-      "name": "aksiyon"
+      "name": "action"
     }
   ]
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertifyService } from '../services/alertify.service';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-movie-create',
   templateUrl: './movie-create.component.html',
@@ -15,7 +16,9 @@ import { NgForm } from '@angular/forms';
 export class MovieCreateComponent implements OnInit {
 
   categories: Category[];
-  model: any = {};
+  model: any = {
+    categoryId: "-1"
+  };
 
   constructor(private categoryService: CategoryService,
     private movieService: MovieService,
@@ -31,45 +34,51 @@ export class MovieCreateComponent implements OnInit {
     })
   }
 
-  createMovie(form:NgForm) {
+  createMovie() {
 
-  //   if(form.title.value === "" || description.value === "" || imageUrl.value === "" || categoryId.value === "-1") {
-  //     this.alertify.error("Lütfen tüm alanları doldurunuz.");
-  //     return;
-  //   }
+    console.log(this.model)
 
-  //   if(title.value.length < 3) {
-  //     this.alertify.error("Film başlığı 3 karakterden az olamaz.");
-  //     return;
-  //   }
+    if(this.model.title === "" || this.model.description === "" || this.model.imageUrl === "" || this.model.categoryId === "-1") {
+      this.alertify.error("Lütfen tüm alanları doldurunuz.");
+      return;
+    }
 
-  //   if(description.value.length < 10 || description.value.length > 100) {
-  //     this.alertify.error("film içeriği 10-100 karakter arasında olmalıdır.");
-  //     return;
-  //   }
+    if(this.model.title.length < 3) {
+      this.alertify.error("Film başlığı 3 karakterden az olamaz.");
+      return;
+    }
 
-  //   const extensions = ["jpg", "jpeg", "png"];
-  //   const extension = imageUrl.value.split('.').pop();
+    if(this.model.description.length < 10 || this.model.description.length > 100) {
+      this.alertify.error("film içeriği 10-100 karakter arasında olmalıdır.");
+      return;
+    }
 
-  // if(extensions.indexOf(extension) === -1){
-  //   this.alertify.error("sadece 'jpeg', 'jpg' ve 'png' uzantılı resimler yükleyebilirsiniz.");
-  //   return
-  // }
+    const extensions = ["jpg", "jpeg", "png"];
+    const extension = this.model.imageUrl.split('.').pop();
 
-  console.log(form)
 
-    // const movie = {
-    //   id:0,
-    //   title: title.value,
-    //   desc: description.value,
-    //   imageUrl: imageUrl.value,
-    //   isPopular: false,
-    //   categoryId: categoryId.value,
-    //   datePublished: new Date().getTime()
-    // };
-    // this.movieService.createMovie(movie).subscribe(movie => {
-    //   console.log(movie);
-    //   this.router.navigate(['/movies/', movie.id]);
-    // })
+  if(extensions.indexOf(extension) === -1){
+    this.alertify.error("sadece 'jpeg', 'jpg' ve 'png' uzantılı resimler yükleyebilirsiniz.");
+    return
+  }
+
+
+
+    const movie = {
+      id:0,
+      title: this.model.title,
+      desc: this.model.description,
+      imageUrl: this.model.imageUrl,
+      isPopular: false,
+      categoryId: this.model.categoryId,
+      datePublished: new Date().getTime()
+    };
+
+    console.log(movie)
+
+    this.movieService.createMovie(movie).subscribe(movie => {
+      console.log(movie);
+      this.router.navigate(['/movies/', movie.id]);
+    })
   }
 }
