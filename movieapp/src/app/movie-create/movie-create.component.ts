@@ -4,7 +4,7 @@ import { MovieService } from '../services/movie.service';
 import { Category } from '../models/category';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../services/alertify.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 
 @Component({
@@ -34,51 +34,67 @@ export class MovieCreateComponent implements OnInit {
     })
   }
 
+  movieForm = new FormGroup({
+
+    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
+    imageUrl: new FormControl('', [Validators.required]),
+    categoryId: new FormControl('', [Validators.required]),
+
+  })
+
+  clearForm() {
+    this.movieForm.patchValue({
+      title: '',
+      description: '',
+      imageUrl: '',
+      categoryId: '-1'
+    });
+  }
+
   createMovie() {
 
     console.log(this.model)
 
-    if(this.model.title === "" || this.model.description === "" || this.model.imageUrl === "" || this.model.categoryId === "-1") {
-      this.alertify.error("Lütfen tüm alanları doldurunuz.");
-      return;
-    }
+  //   if(this.model.title === "" || this.model.description === "" || this.model.imageUrl === "" || this.model.categoryId === "-1") {
+  //     this.alertify.error("Lütfen tüm alanları doldurunuz.");
+  //     return;
+  //   }
 
-    if(this.model.title.length < 3) {
-      this.alertify.error("Film başlığı 3 karakterden az olamaz.");
-      return;
-    }
+  //   if(this.model.title.length < 3) {
+  //     this.alertify.error("Film başlığı 3 karakterden az olamaz.");
+  //     return;
+  //   }
 
-    if(this.model.description.length < 10 || this.model.description.length > 100) {
-      this.alertify.error("film içeriği 10-100 karakter arasında olmalıdır.");
-      return;
-    }
+  //   if(this.model.description.length < 10 || this.model.description.length > 100) {
+  //     this.alertify.error("film içeriği 10-100 karakter arasında olmalıdır.");
+  //     return;
+  //   }
 
-    const extensions = ["jpg", "jpeg", "png"];
-    const extension = this.model.imageUrl.split('.').pop();
-
-
-  if(extensions.indexOf(extension) === -1){
-    this.alertify.error("sadece 'jpeg', 'jpg' ve 'png' uzantılı resimler yükleyebilirsiniz.");
-    return
-  }
+  //   const extensions = ["jpg", "jpeg", "png"];
+  //   const extension = this.model.imageUrl.split('.').pop();
 
 
+  // if(extensions.indexOf(extension) === -1){
+  //   this.alertify.error("sadece 'jpeg', 'jpg' ve 'png' uzantılı resimler yükleyebilirsiniz.");
+  //   return
+  // }
 
-    const movie = {
-      id:0,
-      title: this.model.title,
-      desc: this.model.description,
-      imageUrl: this.model.imageUrl,
-      isPopular: false,
-      categoryId: this.model.categoryId,
-      datePublished: new Date().getTime()
-    };
 
-    console.log(movie)
 
-    this.movieService.createMovie(movie).subscribe(movie => {
-      console.log(movie);
-      this.router.navigate(['/movies/', movie.id]);
-    })
+    // const movie = {
+    //   id:0,
+    //   title: this.model.title,
+    //   desc: this.model.description,
+    //   imageUrl: this.model.imageUrl,
+    //   isPopular: false,
+    //   categoryId: this.model.categoryId,
+    //   datePublished: new Date().getTime()
+    // };
+
+
+    // this.movieService.createMovie(movie).subscribe(movie => {
+    //   this.router.navigate(['/movies/', movie.id]);
+    // })
   }
 }
