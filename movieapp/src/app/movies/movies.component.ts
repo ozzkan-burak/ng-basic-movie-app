@@ -16,7 +16,7 @@ import { MovieService } from '../services/movie.service';
 })
 export class MoviesComponent implements OnInit {
 
-  title= "Film Listesi";
+  title= "Film List";
   popularTitle = "Popüler Filmler";
   alert= "Listede Film Bulunmuyor";
   movies: Movie[] = [];
