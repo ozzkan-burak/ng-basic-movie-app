@@ -33,22 +33,13 @@
       "categoryId": 4
     },
     {
-      "id": 5,
+      "id": 8,
+      "title": "yeni bir film",
+      "desc": "yeni bir film",
+      "imageUrl": "1.jpeg",
       "isPopular": false,
-      "categoryId": "-1",
-      "datePublished": 1643233191950
-    },
-    {
-      "id": 6,
-      "isPopular": false,
-      "categoryId": "-1",
-      "datePublished": 1643233261868
-    },
-    {
-      "id": 7,
-      "isPopular": false,
-      "categoryId": "-1",
-      "datePublished": 1643233286877
+      "categoryId": "1",
+      "datePublished": 1643834747766
     }
   ],
   "categories": [
