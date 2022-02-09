@@ -1,18 +1,19 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { Movie } from "../models/movie";
 
 @Injectable()
 export class MovieService {
   url = "http://localhost:3000/movies";
+  url_firebase =  "https://angular-movie-app-ea50d-default-rtdb.europe-west1.firebasedatabase.app/";
 
   constructor(private http: HttpClient) {}
 
   getMovies(categoryId: number): Observable<Movie[]> {
 
-    let newUrl = this.url;
+    let newUrl = `${this.url_firebase}/movies.json`;
 
     console.log(categoryId);
     if(categoryId) {
@@ -20,12 +21,22 @@ export class MovieService {
     }
 
     return this.http.get<Movie[]>(newUrl).pipe(
+      map(response => {
+
+        const movies: Movie[] = [];
+
+        for(const key in response) {
+          movies.push({...response[key], id: key});
+        }
+
+        return movies;
+      }),
       catchError(this.handleError)
     )
   }
 
   getMovieById(movieId: string): Observable<Movie> {
-    return this.http.get<Movie>(`${this.url}/${movieId}`).pipe(
+    return this.http.get<Movie>(`${this.url_firebase}/${movieId}`).pipe(
       catchError(this.handleError)
     )
   }
@@ -37,7 +48,7 @@ export class MovieService {
         'Authorization': 'my-auth-token'
       })
     }
-    return this.http.post<Movie>(this.url, movie, httpOptions).pipe(
+    return this.http.post<Movie>(this.url_firebase + "/movies.json", movie, httpOptions).pipe(
       catchError(this.handleError)
     )
   }
