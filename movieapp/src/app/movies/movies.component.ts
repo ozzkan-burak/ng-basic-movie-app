@@ -24,7 +24,8 @@ export class MoviesComponent implements OnInit {
   popularMovies: Movie[];
   movieRepository: MovieRepository;
   filterText : string = "";
-  error: any
+  error: any;
+  loading: boolean = false;
 
   constructor(
     private alertify: AlertifyService,
@@ -37,11 +38,15 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoot.params.subscribe(params => {
-
+      this.loading = true;
       this.movieService.getMovies(params["id"]).subscribe(data => {
         this.movies = data;
         this.FilteredMovies = this.movies;
-      }, error => this.error = error);
+        this.loading = false;
+      }, error => {
+        this.error = error;
+        this.loading = false;
+      });
     })
   }
 

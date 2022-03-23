@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { catchError, delay, map } from "rxjs/operators";
 import { Movie } from "../models/movie";
 
 @Injectable()
@@ -30,13 +30,15 @@ export class MovieService {
 
         return movies;
       }),
-      catchError(this.handleError)
+      catchError(this.handleError),
+      delay(1000)
     )
   }
 
   getMovieById(movieId: string): Observable<Movie> {
     return this.http.get<Movie>(`${this.url_firebase}/movies/${movieId}.json`).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      delay(1000)
     )
   }
 
