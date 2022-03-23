@@ -2,12 +2,14 @@
   {{error.message}}
 </div>
 
+<div class="mb-3">
+  <input type="text" [(ngModel)]="filterText" (ngModelChange)="onInputChange()" class="form-control" placeholder="Search"  />
+  <small class="text-muted" *ngIf="filterText"> Your Search Text: {{filterText}}</small>
+</div>
 
 <div *ngIf="movies.length > 0 else no_movies">
   <h1>{{title}}</h1>
   <div class="alert alert-warning">{{FilteredMovies.length}} pieces film listed</div>
-
-
 
   <!-- Parametreli template kullanımı -->
   <ng-template [ngTemplateOutlet]="movieList3" [ngTemplateOutletContext]="{movies: popularMovies}" }></ng-template>
@@ -17,10 +19,7 @@
 
 </div>
 
-<div class="mb-3">
-  <input type="text" [(ngModel)]="filterText" (ngModelChange)="onInputChange()" class="form-control" placeholder="Arama"  />
-  <small class="text-muted" *ngIf="filterText"> Aradığınız Kelime: {{filterText}}</small>
-</div>
+
 
 <ng-template  #no_movies>
   <div class="alert alert-warning">{{alert}}</div>
