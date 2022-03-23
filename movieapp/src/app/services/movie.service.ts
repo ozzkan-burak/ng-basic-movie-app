@@ -13,8 +13,6 @@ export class MovieService {
 
   getMovies(categoryId: number): Observable<Movie[]> {
 
-
-
     return this.http.get<Movie[]>(`${this.url_firebase}/movies.json`).pipe(
       map(response => {
 
