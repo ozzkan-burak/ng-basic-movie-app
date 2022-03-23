@@ -16,19 +16,15 @@ export class CategoryService {
 
   getCategories(): Observable<Category[]> {
 
-    return this.http.get<Category[]>(`${this.url_firebase}/movies.json`).pipe(
+    return this.http.get<Category[]>(`${this.url_firebase}/categories.json`).pipe(
 
-      map(response: any => {
+      map(response => {
         const categories: Category[] = [];
-
         for(const key in response) {
-          if(response.hasOwnProperty(key)) {
-            categories.push({...response[key], id: key});
-          }
+          categories.push({...response[key], id: key});
         }
-
-        return categories
-      }
+        return categories;
+      })
     );
   }
 
