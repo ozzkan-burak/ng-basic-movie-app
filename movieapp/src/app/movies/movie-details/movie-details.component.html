@@ -1,3 +1,4 @@
+<div *ngIf="!loading">
 <div *ngIf="movie else no_movie">
   <div class="card">
     <div class="row">
@@ -13,9 +14,14 @@
     </div>
   </div>
 </div>
+</div>
 
 <ng-template #no_movie>
   <div class="alert alert-danger">
     <strong>Film bulunamadı!</strong>
   </div>
 </ng-template>
+
+<div *ngIf="loading" class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
