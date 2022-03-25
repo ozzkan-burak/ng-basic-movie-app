@@ -12,6 +12,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieDetailsComponent implements OnInit {
 
   movie: Movie;
+  loading: boolean = false;
 
   constructor(private movieService: MovieService,
     private activatedRoute: ActivatedRoute
@@ -19,8 +20,10 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
+      this.loading = true;
       this.movieService.getMovieById(params["id"]).subscribe(movie => {
         this.movie = movie;
+        this.loading = false;
       })
     })
   }
