@@ -4,4 +4,5 @@ export interface IAuthResponse {
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: string;
 }
