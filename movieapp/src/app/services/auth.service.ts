@@ -9,8 +9,6 @@ import { IAuthResponse } from '../auth/AuthInterface';
 })
 export class AuthService {
   
-  
-
   constructor(private http: HttpClient) { }
 
   signUp(email: string, password: string) {
@@ -20,4 +18,12 @@ export class AuthService {
       returnSecureToken: true
     })
   }
-}
+
+  login(email:string, password:string) {
+    return this.http.post<IAuthResponse>(this.url,{
+      email,
+      password,
+      returnSecureToken: true
+    })
+  }
+} 
