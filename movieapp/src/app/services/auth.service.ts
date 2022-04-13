@@ -26,4 +26,4 @@ export class AuthService {
       returnSecureToken: true
     })
   }
-}
+} 
