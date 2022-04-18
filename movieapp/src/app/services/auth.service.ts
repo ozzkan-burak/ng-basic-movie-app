@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // interface
-import { IAuthResponse } from '../auth/AuthInterface';
+import { IAuthResponse } from '../models/AuthInterface';
 
 
 @Injectable({
@@ -9,6 +9,9 @@ import { IAuthResponse } from '../auth/AuthInterface';
 })
 export class AuthService {
   
+  api_key = 'AIzaSyDHokh6I9jVIIlKK10b1Cqq2jNakz4JLqs'
+  url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.api_key}`
+
   constructor(private http: HttpClient) { }
 
   signUp(email: string, password: string) {
@@ -26,4 +29,4 @@ export class AuthService {
       returnSecureToken: true
     })
   }
-} 
+}
