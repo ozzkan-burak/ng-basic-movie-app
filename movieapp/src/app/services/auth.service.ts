@@ -10,7 +10,7 @@ import { IAuthResponse } from '../models/AuthInterface';
 export class AuthService {
   
  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { } 
 
   signUp(email: string, password: string) {
     return this.http.post<IAuthResponse>(this.url,{
